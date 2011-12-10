@@ -1,0 +1,19 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <!-- $Id: pom.xml 543 2011-12-05 07:31:54Z ovaraksin@googlemail.com $ -->
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.primefaces.extensions</groupId>
+    <artifactId>pe-builder</artifactId>
+    <packaging>pom</packaging>
+    <name>pe-builder</name>
+    <version>SNAPSHOT</version>
+
+    <modules>
+		<module>master-pom</module>
+		<module>resources-optimizer-maven-plugin</module>
+		<module>primefaces-extensions</module>
+		<module>resources</module>
+		<module>showcase</module>	
+    </modules>	
+</project>

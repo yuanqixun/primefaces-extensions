@@ -1,0 +1,14 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <!-- $Id: pom.xml 355 2011-10-26 21:24:05Z ovaraksin@googlemail.com $ -->
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.primefaces.extensions</groupId>
+    <artifactId>pe-resources-builder</artifactId>
+    <packaging>pom</packaging>
+    <name>pe-resources-builder</name>
+    <version>SNAPSHOT</version>
+
+    <modules>
+		<module>ckeditor</module>
+    </modules>
+</project>

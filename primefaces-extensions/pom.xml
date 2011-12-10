@@ -1,0 +1,204 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <!-- $Id: pom.xml 572 2011-12-09 20:23:49Z ovaraksin@googlemail.com $ -->
+    <parent>
+        <groupId>org.primefaces.extensions</groupId>
+        <artifactId>master-pom</artifactId>
+        <version>0.2.1-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.primefaces.extensions</groupId>
+    <artifactId>primefaces-extensions</artifactId>
+    <packaging>jar</packaging>
+    <version>0.2.0-SNAPSHOT</version>
+    <name>primefaces-extensions</name>
+    <description>
+        <![CDATA[PrimeFaces Extensions Project for Maven.]]>
+    </description>
+    <url>http://code.google.com/p/primefaces-extensions</url>
+
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>Google Code</system>
+        <url>http://code.google.com/p/primefaces-extensions/issues/list</url>
+    </issueManagement>
+
+    <inceptionYear>2011</inceptionYear>
+
+    <scm>
+        <connection>scm:svn:http://primefaces-extensions.googlecode.com/svn/primefaces-extensions/trunk</connection>
+        <developerConnection>scm:svn:https://primefaces-extensions.googlecode.com/svn/primefaces-extensions/trunk</developerConnection>
+        <url>http://code.google.com/p/primefaces-extensions/source/browse/#svn/primefaces-extensions/trunk</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>andraschko</id>
+            <name>Thomas Andraschko</name>
+            <email>zoigln@googlemail.com</email>
+            <roles>
+                <role>Buildmaster</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>varaksin</id>
+            <name>Oleg Varaksin</name>
+            <email>ovaraksin@googlemail.com</email>
+            <roles>
+                <role>Buildmaster</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                    <excludes>
+                        <exclude>**/ckeditor/changes.txt</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${resources.dir.uncompressed}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/resources/META-INF/resources/primefaces-extensions</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>            
+            <plugin>
+                <groupId>org.primefaces.extensions</groupId>
+                <artifactId>resources-optimizer-maven-plugin</artifactId>
+                <configuration>
+                    <resourcesSets>
+                        <resourcesSet>
+                            <includes>
+                                <include>imageareaselect/**</include>
+                                <include>layout/**</include>
+                                <include>tooltip/**</include>
+                                <include>keyfilter/**</include>
+                            </includes>
+                            <aggregations>
+                                <aggregation>
+                                    <inputDir>${resources.dir.compressed}</inputDir>
+                                    <subDirMode>true</subDirMode>
+                                </aggregation>
+                                <aggregation>
+                                    <withoutCompress>true</withoutCompress>
+                                    <inputDir>${resources.dir.uncompressed}</inputDir>
+                                    <subDirMode>true</subDirMode>
+                                </aggregation>
+                            </aggregations>
+                        </resourcesSet>
+                        <resourcesSet>
+                            <includes>
+                                <include>masterdetail/masterdetail.css</include>
+                            </includes>
+                            <aggregations>
+                                <aggregation>
+                                    <inputDir>${resources.dir.compressed}</inputDir>
+                                    <outputFile>${resources.dir.compressed}/primefaces-extensions.css</outputFile>
+                                </aggregation>
+                                <aggregation>
+                                    <withoutCompress>true</withoutCompress>
+                                    <inputDir>${resources.dir.uncompressed}</inputDir>
+                                    <outputFile>${resources.dir.uncompressed}/primefaces-extensions.css</outputFile>
+                                </aggregation>
+                            </aggregations>
+                        </resourcesSet>
+                        <resourcesSet>
+                            <includes>
+                                <include>core/core.js</include>
+                                <include>ajaxstatus/ajaxstatus.js</include>
+                                <include>ckeditor/widget.js</include>
+                                <include>imagerotateandresize/imagerotateandresize.js</include>
+                            </includes>
+                            <aggregations>
+                                <aggregation>
+                                    <inputDir>${resources.dir.compressed}</inputDir>                                
+                                    <outputFile>${resources.dir.compressed}/primefaces-extensions.js</outputFile>
+                                </aggregation>
+                                <aggregation>
+                                    <withoutCompress>true</withoutCompress>
+                                    <inputDir>${resources.dir.uncompressed}</inputDir>                                
+                                    <outputFile>${resources.dir.uncompressed}/primefaces-extensions.js</outputFile>
+                                </aggregation>
+                            </aggregations>
+                        </resourcesSet>
+                    </resourcesSets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${pe.jsf.group}</groupId>
+            <artifactId>${pe.jsf.artifact}-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+        </dependency>
+
+        <!-- Component dependencies -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+    </dependencies>
+    
+    <properties>
+      <resources.dir.compressed>${project.build.directory}/classes/META-INF/resources/primefaces-extensions</resources.dir.compressed>
+      <resources.dir.uncompressed>${project.build.directory}/classes/META-INF/resources/primefaces-extensions-uncompressed</resources.dir.uncompressed>
+    </properties>    
+</project>
